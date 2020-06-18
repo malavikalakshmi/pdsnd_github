@@ -218,6 +218,7 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
          #original_dataframe_after_initial_modification
+         #Retaining original information to display later on request of the user.
         filteredModData = df.copy(deep = True)
         if df.empty == False:
             time_stats(df,city,month,day)
