@@ -25,23 +25,24 @@ def get_filters():
     while city not in cities or city is int:
         print("please check your city you have entered: Either it is numeric or not in the cities list -\nplease enter cities mentioned here in this list:chicago, new york city, washington")
         city = input("please enter city again").lower()
-    print("You have entered the city {}".format(city)) 
+    print("You have entered the city {}".format(city))
     # TO DO: get user input for month (all, january, february, ... , june)
     month = input("enter the month you want to explore :  Month or all months  - please enter 01 for January, 02 for February, 03 for March, 04 for April, 05 for May, 06 for June and 0 for all months")
     months = ['01','02','03','04','05','06','0']
     while month not in months:
         print("please check the month you have entered. Valid values - 01 for January, 02 for February, 03 for March, 04 for April, 05 for May, 06 for June and 0 for all months")
         month = input("please enter month again")
-    print("You have entered the month identifier{}".format(month)) 
-    
+    print("You have entered the month identifier{}".format(month))
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = input("enter the day of the week you want to explore: 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','all'")
     days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','all']
+    #checking for input present in our available cities
     while day not in days:
         print("please check the day of week you have entered. Valid values - 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','all'")
         day = input("please enter day again")
-    print("You have entered the day {}".format(day)) 
-   
+    print("You have entered the day {}".format(day))
+
 
     print('-'*40)
     return city, month, day
@@ -62,7 +63,7 @@ def load_data(city, month, day):
     df_import = pd.read_csv(str(res))
     df_import['Start Time'] = pd.to_datetime(df_import['Start Time'])
     #strftime- to get in our own format
-    df_import['mnth'] = df_import['Start Time'].apply(lambda x: x.strftime('%m')) 
+    df_import['mnth'] = df_import['Start Time'].apply(lambda x: x.strftime('%m'))
     df_import['Start Time'] = pd.to_datetime(df_import['Start Time'])
     df_import['day_of_week'] = df_import['Start Time'].dt.day_name()
     if month == '0' and day == 'all':
@@ -70,10 +71,10 @@ def load_data(city, month, day):
     else:
         df_modified = getFilteredData(df_import,month,day)
         return df_modified
-    
+
 def getFilteredData(df_import,month,day):
     """
-    The fucntion filters the data frame based on the input filters selected by user. 
+    The fucntion filters the data frame based on the input filters selected by user.
     Args:
         (str) df_import - data frame after added 2 new columns to the original data frame -mnth & day_of_week
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -93,10 +94,10 @@ def getFilteredData(df_import,month,day):
         new_df_modified = df_import[df_import.mnth == month]
         new_df_modified = new_df_modified[new_df_modified.day_of_week == day]
         return new_df_modified
-        
+
 
 def time_stats(df,city,month,day):
-   
+
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
@@ -191,23 +192,23 @@ def user_stats(df):
     # TO DO: Display counts of user types
     if 'User_Type' in df.columns:
         count_user_types = df['User_Type'].value_counts(dropna=False)
-        print("count of user types is \n{}".format(count_user_types)) 
+        print("count of user types is \n{}".format(count_user_types))
     else:
           print("There is no user type data available for your selected combination of city, month and day of week")
     # TO DO: Display counts of gender
     if 'Gender' in df.columns:
-        count_user_gender = df['Gender'].value_counts(dropna=True) 
-        print("count of gender types is \n{}".format(count_user_gender)) 
+        count_user_gender = df['Gender'].value_counts(dropna=True)
+        print("count of gender types is \n{}".format(count_user_gender))
     else:
         print("There is no gender data available for your selected combination of city, month and day of week")
-        
+
 
     # TO DO: Display earliest, most recent, and most common year of birth
    # ifdf.isnull().sum().sort_values(ascending = False)
     if 'Birth_Year' in df.columns:
-        min_dob = df['Birth_Year'].min(skipna = True) 
+        min_dob = df['Birth_Year'].min(skipna = True)
         max_dob = df['Birth_Year'].max(skipna = True)
-        mode_dob = df['Birth_Year'].mode() 
+        mode_dob = df['Birth_Year'].mode()
         print(" Earliest, most recent year of birth are {},{}".format(min_dob,max_dob))
         print(" Most common year of birth is {}".format(mode_dob))
     else:
@@ -220,7 +221,7 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-         #original_dataframe_after_initial_modification 
+         #original_dataframe_after_initial_modification
         filteredModData = df.copy(deep = True)
         if df.empty == False:
             time_stats(df,city,month,day)
