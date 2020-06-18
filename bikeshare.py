@@ -104,6 +104,7 @@ def time_stats(df,city,month,day):
     start_time = time.time()
 
     # TO DO: display the most common month
+    #number identifier for month and its equivalent month name to display
     months_dict ={"01":"January","02":"February","03":"March","04":"April","05":"May","06":"june"}
     if month == '0':
         mode_calculated_df = df.mnth.mode()
