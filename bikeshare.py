@@ -139,21 +139,17 @@ def time_stats(df,city,month,day):
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
-
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-
     # TO DO: display most commonly used start station
     df.columns = df.columns.str.replace(' ', '_')
     mode_calculated_df_ss = df.Start_Station.mode()
     mode_calculated_ss = mode_calculated_df_ss.iloc[0]
     print("Most most commonly used start station is {}".format(mode_calculated_ss))
-
     # TO DO: display most commonly used end station
     mode_calculated_df_es = df.End_Station.mode()
     mode_calculated_es = mode_calculated_df_es.iloc[0]
     print("Most most commonly used start station is {}".format(mode_calculated_es))
-
     # TO DO: display most frequent combination of start station and end station trip
     # first grouping by the 2 columns that we want
     #size function gives the count of each group
