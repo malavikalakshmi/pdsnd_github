@@ -15,3 +15,5 @@ It's important to give proper credit. Add links to any repo that inspired you or
 Help reference links - Pandas official website - https://pandas.pydata.org/pandas-docs/stable/reference/io.html
 ##Adding additional information on input types
 This project has various validations on input types.
+##Additional comments about the Project
+There are some use cases when the input selection criteria and combination do not result in any rows in the data. Hence, user is prompted to change selection and combination.
