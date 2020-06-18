@@ -26,6 +26,7 @@ def get_filters():
         print("please check your city you have entered: Either it is numeric or not in the cities list -\nplease enter cities mentioned here in this list:chicago, new york city, washington")
         city = input("please enter city again").lower()
     print("You have entered the city {}".format(city))
+    print('-'*40)
     # TO DO: get user input for month (all, january, february, ... , june)
     month = input("enter the month you want to explore :  Month or all months  - please enter 01 for January, 02 for February, 03 for March, 04 for April, 05 for May, 06 for June and 0 for all months")
     months = ['01','02','03','04','05','06','0']
@@ -140,21 +141,17 @@ def time_stats(df,city,month,day):
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
-
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-
     # TO DO: display most commonly used start station
     df.columns = df.columns.str.replace(' ', '_')
     mode_calculated_df_ss = df.Start_Station.mode()
     mode_calculated_ss = mode_calculated_df_ss.iloc[0]
     print("Most most commonly used start station is {}".format(mode_calculated_ss))
-
     # TO DO: display most commonly used end station
     mode_calculated_df_es = df.End_Station.mode()
     mode_calculated_es = mode_calculated_df_es.iloc[0]
     print("Most most commonly used start station is {}".format(mode_calculated_es))
-
     # TO DO: display most frequent combination of start station and end station trip
     # first grouping by the 2 columns that we want
     #size function gives the count of each group
@@ -223,6 +220,7 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
          #original_dataframe_after_initial_modification
+         #Retaining original information to display later on request of the user.
         filteredModData = df.copy(deep = True)
         if df.empty == False:
             time_stats(df,city,month,day)
